@@ -1,0 +1,20 @@
+# SPA routing: serve index.html for all client-side routes.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers. Mirrors SoulframeTools, but the CSP is widened ONLY as far as
+# the livestream embeds require: YouTube/Twitch players in frame-src, and YouTube
+# thumbnail hosts in img-src. Everything else stays locked to 'self'.
+#
+# Note: frame-ancestors stays 'none' (nobody may embed US); frame-src governs what
+# WE may embed. The two are independent.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://faves.grow.me https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.jtvnw.net https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://faves.grow.me https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://player.twitch.tv https://www.twitch.tv; frame-ancestors 'none';"
