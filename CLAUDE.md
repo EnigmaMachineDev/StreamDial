@@ -27,7 +27,9 @@ Deployed to Netlify. `netlify.toml` configures the SPA redirect and a CSP that, 
 
 ## Architecture
 
-React 18 + Vite + TypeScript (strict) SPA, matching SoulframeTools conventions: `react-router-dom` routing, Tailwind with the shared dark-green theme tokens, `lucide-react` icons, Cinzel/Inter fonts, sibling header/footer chrome.
+React 18 + Vite + TypeScript (strict) SPA, matching SoulframeTools conventions: `react-router-dom` routing, Tailwind with the shared green theme tokens in **light and dark**, `lucide-react` icons, Cinzel/Inter fonts, sibling header/footer chrome.
+
+**Theme (light / dark):** the `brand` tokens are CSS variables (RGB channels) in `src/index.css` — `:root` is the light theme (Roadwrench's daylight palette), `:root[data-theme="dark"]` the original dark green — mapped in `tailwind.config.js` with `rgb(var(--x) / <alpha-value>)`. `public/theme.js` is a plain blocking `<script>` at the top of `index.html`'s `<head>`: it resolves the preference (`system` default, `light`, `dark`, in `localStorage['theme']`) before first paint, follows OS changes, and sets `<html data-theme>`; `window.siteTheme` is its API and `src/components/ThemeToggle.tsx` in the header cycles Match system → Light → Dark. Overlay chips on video thumbnails use `text-white/*` on `bg-black/*` on purpose — they sit on the image, not the page.
 
 **State:** a single typed store (`src/store/useStore.ts`) backed by a `localStorage`-sync layer under one key (`mss:appData:v1`), debounced writes, with a versioned `schemaVersion` + migration (`src/lib/migrate.ts`) run on load **and** on import. Data is **normalized**: channels live in a `Record<id, StreamChannel>` dictionary referenced by ordered `channelIds` per `ChannelList`, so one channel can appear in multiple lists; orphaned channels are GC'd on save.
 

@@ -105,7 +105,7 @@ export default function ChannelCard({
               <span className="w-1.5 h-1.5 rounded-full bg-live" /> Live
             </span>
           ) : (
-            <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-muted">
+            <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/70">
               Link only
             </span>
           )}
@@ -116,7 +116,7 @@ export default function ChannelCard({
           <button
             type="button"
             onClick={onTogglePreview}
-            className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-lg bg-black/70 px-2.5 py-1.5 text-xs text-brand-text hover:bg-black/90 transition-colors"
+            className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-lg bg-black/70 px-2.5 py-1.5 text-xs text-white/90 hover:bg-black/90 transition-colors"
           >
             {isPreviewing ? (
               <>

@@ -132,7 +132,7 @@ export default function AddChannelModal({ onClose }: { onClose: () => void }) {
                 <button
                   type="button"
                   onClick={() => setShowPreview((p) => !p)}
-                  className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-lg bg-black/70 px-2.5 py-1.5 text-xs text-brand-text hover:bg-black/90 transition-colors"
+                  className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-lg bg-black/70 px-2.5 py-1.5 text-xs text-white/90 hover:bg-black/90 transition-colors"
                 >
                   {showPreview ? (
                     <>
